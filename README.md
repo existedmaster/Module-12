@@ -15,4 +15,7 @@ The Swagger UI lists all available API endpoints along with their descriptions a
 You can expand each endpoint to see more details and perform operations such as GET, POST, PUT, and DELETE.
 
 Fill in the required fields and click execute button to send the request to the API endpoint. 
-It should work as intended
+It should work as intended, make sure that once the example account is created.
+To log into it by selecting the authorize lock at the top of the page and login with the credentials you used
+
+Afterwards you will be able to make edits to any calculations you've made after the fact.
