@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI/CD Pipeline
 
 on:
   push:
@@ -40,7 +40,7 @@ jobs:
       - name: Install dependencies
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
-        run: |
+        run: | # Set up virtual environment and install dependencies
           python -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
@@ -50,7 +50,7 @@ jobs:
       - name: Run tests
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
-        run: |
+        run: | # Activate virtual environment and run tests
           source venv/bin/activate
           
           # 1) Unit tests
@@ -84,7 +84,7 @@ jobs:
     needs: security
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    environment: production
+    environment: prod
     steps:
       - uses: actions/checkout@v4
       
@@ -92,15 +92,15 @@ jobs:
       
       - uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKERSUER }}
+          password: ${{ secrets.DOCKERTOKEN }}
           
       - uses: docker/build-push-action@v5
         with:
           push: true
           tags: |
-            kaw393939/601_module9:latest
-            kaw393939/601_module9:${{ github.sha }}
+            existedmaster/module-12:latest
+            existedmaster/module-12:${{ github.sha }}
           platforms: linux/amd64,linux/arm64
-          cache-from: type=registry,ref=kaw393939/601_module9:cache
+          cache-from: type=registry,ref=existedmaster/module-12:cache
           cache-to: type=inline,mode=max
